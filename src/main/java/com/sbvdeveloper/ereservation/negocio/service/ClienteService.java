@@ -2,6 +2,7 @@ package com.sbvdeveloper.ereservation.negocio.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +25,10 @@ import com.sbvdeveloper.ereservation.negocio.repository.ClienteRepository;
 @Transactional(readOnly = true)//principos de ACID
 public class ClienteService {
 
+	
 	private final ClienteRepository clienteRepository;
 
+	@Autowired
 	public ClienteService(ClienteRepository clienteRepository) {
 		this.clienteRepository = clienteRepository;
 	}

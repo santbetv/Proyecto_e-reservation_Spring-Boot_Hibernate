@@ -5,6 +5,7 @@ package com.sbvdeveloper.ereservation.vista.resources;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,7 +40,8 @@ import io.swagger.annotations.ApiResponses;
 public class ClienteResource {
 
 	private final ClienteService clienteService;
-
+	
+	@Autowired
 	public ClienteResource(ClienteService clienteService) {
 		this.clienteService = clienteService;
 	}

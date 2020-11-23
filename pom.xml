@@ -55,11 +55,19 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.7.0</version>
 		</dependency>
-		
+
 		<!--Seguridad -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<!-- <version>2.0.4.RELEASE</version> -->
 		</dependency>
 
 
@@ -73,10 +81,54 @@
 	</dependencies>
 
 	<build>
+	
+	
+		<finalName>e-reservation</finalName><!-- nombre final de la aplicacion -->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+			<!-- Esto permite construir una imagen a partir de nuestro pom, en el momento que estemos configurando -->
+			<!-- y no tenerlo que correr desde nuestro terminal-->
+			<plugin>
+				<groupId>io.fabric8</groupId><!-- plugin para hacer imagenes -->
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.27.2</version>
+				<configuration><!-- Seccion de configuracion -->
+					<images>
+						<image>
+							<name>santbetv/${project.build.finalName}</name><!-- Usuario y finalName  -->
+							<build>
+								<from>openjdk</from><!-- JDK libre , independiente -->
+								<entryPoint>java -Dspring.profiles.active=prod -jar /home/rizzoli/Documentos/DockerImagenIndependientes/${project.build.finalName}.jar</entryPoint><!-- Crear imagen para produccion -->
+								<assembly><!-- Como se ensambla o construye internamente -->
+									<basedir>/home/rizzoli/Documentos/DockerImagenIndependientes/</basedir><!-- directorio base para la generacion de imagen -->
+									<descriptorRef>artifact</descriptorRef>
+									<inline>
+										<id>assembly</id>
+										<files>
+											<file>
+												<source>target/${project.build.finalName}.jar</source><!-- Archivo a partir de cual se genrear la imagen -->
+											</file>
+										</files>
+									</inline>
+								</assembly>
+								<tags><!-- Versionador -->
+									<tag>latest</tag><!-- Siempre el ultimo -->
+								</tags>
+								<ports>
+									<port>8080</port><!-- puerto por donde sale la app -->
+								</ports>
+							</build>
+							<run><!-- Ejecucion -->
+								<namingStrategy>alias</namingStrategy><!-- alias para poder ejecutarse -->
+							</run>
+							<alias>${project.build.finalName}</alias>
+						</image>
+					</images>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
