@@ -35,6 +35,7 @@ public class Reserva {
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private String idReserva;
+	private String codigoReserva;
 	@Temporal(TemporalType.DATE)
 	private Date fechaIngreso;
 	@Temporal(TemporalType.DATE)

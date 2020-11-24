@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbvdeveloper.ereservation.modelo.Cliente;
 import com.sbvdeveloper.ereservation.negocio.service.ClienteService;
+import com.sbvdeveloper.ereservation.vista.resources.vo.ClienteVO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,7 +37,7 @@ import io.swagger.annotations.ApiResponses;
  */
 @RestController
 @RequestMapping("/api/cliente")
-@Api(tags = "cliente")
+@Api(tags = "cliente")//Swagger-Core solo incluirá si tiene esto
 public class ClienteResource {
 
 	private final ClienteService clienteService;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sbvdeveloper.ereservation.vista.resources;
+package com.sbvdeveloper.ereservation.vista.resources.vo;
 
 import lombok.Data;
 
