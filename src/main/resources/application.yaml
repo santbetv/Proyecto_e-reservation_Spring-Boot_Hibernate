@@ -12,6 +12,19 @@ spring:
       ddl-auto: create-drop      
     generate-ddl: true
     show-sql: true
+server:
+  port: 9090
+logging:
+  level:
+    org:
+      hibernate:
+        SQL:
+          TRACE
+        type:
+          descriptor:
+            sql:
+              BasicBinder:
+                TRACE
 #    properties:
 #      hibernate:
 #        jdbc:

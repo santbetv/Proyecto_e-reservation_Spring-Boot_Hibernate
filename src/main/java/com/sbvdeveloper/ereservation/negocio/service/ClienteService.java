@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sbvdeveloper.ereservation.modelo.Cliente;
+import com.sbvdeveloper.ereservation.entity.Cliente;
 import com.sbvdeveloper.ereservation.negocio.repository.ClienteRepository;
 
 /**
  * 
- * El servicio lo que hace es que consume los metodos definidos en un repositorio y
- * los expone a través de un servicio para utilizar con el FrontEnd
+ * El servicio lo que hace es que consume los metodos definidos en un
+ * repositorio y los expone a través de un servicio para utilizar con el
+ * FrontEnd
  * 
  * 
  * Clase para definir los servicios del cliente
@@ -22,16 +23,11 @@ import com.sbvdeveloper.ereservation.negocio.repository.ClienteRepository;
  *
  */
 @Service
-@Transactional(readOnly = true)//principos de ACID
+@Transactional(readOnly = true) // principos de ACID
 public class ClienteService {
 
-	
-	private final ClienteRepository clienteRepository;
-
 	@Autowired
-	public ClienteService(ClienteRepository clienteRepository) {
-		this.clienteRepository = clienteRepository;
-	}
+	private ClienteRepository clienteRepository;
 
 	/**
 	 * Método para realizar la operación de guardar un cliente

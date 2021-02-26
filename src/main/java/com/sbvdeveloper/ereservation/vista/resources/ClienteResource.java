@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sbvdeveloper.ereservation.modelo.Cliente;
+import com.sbvdeveloper.ereservation.entity.Cliente;
 import com.sbvdeveloper.ereservation.negocio.service.ClienteService;
 import com.sbvdeveloper.ereservation.vista.resources.vo.ClienteVO;
 
@@ -37,18 +37,15 @@ import io.swagger.annotations.ApiResponses;
  */
 @RestController
 @RequestMapping("/api/cliente")
-@Api(tags = "cliente")//Swagger-Core solo incluirá si tiene esto
+@Api(tags = "cliente") // Swagger-Core solo incluirá si tiene esto
 public class ClienteResource {
 
-	private final ClienteService clienteService;
-	
 	@Autowired
-	public ClienteResource(ClienteService clienteService) {
-		this.clienteService = clienteService;
-	}
+	private ClienteService clienteService;
 
 	@PostMapping
-	@ApiOperation(value = "Crear cliente", notes = "Servicio para crear un nuevo cliente")//Como se idetifica para documentar el codigo
+	@ApiOperation(value = "Crear cliente", notes = "Servicio para crear un nuevo cliente") // Como se idetifica para
+																							// documentar el codigo
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Cliente creado correctamente"),
 			@ApiResponse(code = 404, message = "Solicitd Inválida") })
 	public ResponseEntity<Cliente> createCliente(@RequestBody ClienteVO clienteVo) {
@@ -62,7 +59,8 @@ public class ClienteResource {
 	}
 
 	@PutMapping("/{idetificacion}")
-	@ApiOperation(value = "Actualizar cliente", notes = "Servicio para actualizar un cliente")//Como se idetifica para documentar el codigo
+	@ApiOperation(value = "Actualizar cliente", notes = "Servicio para actualizar un cliente") // Como se idetifica para
+																								// documentar el codigo
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Cliente actualizado correctamente"),
 			@ApiResponse(code = 404, message = "Cliente no encontrado") })
 	public ResponseEntity<Cliente> updateCliente(@PathVariable("idetificacion") String idetificacion,
@@ -82,7 +80,8 @@ public class ClienteResource {
 	}
 
 	@DeleteMapping("/{identificacion}")
-	@ApiOperation(value = "Eliminar cliente", notes = "Servicio para eliminar un cliente")//Como se idetifica para documentar el codigo
+	@ApiOperation(value = "Eliminar cliente", notes = "Servicio para eliminar un cliente") // Como se idetifica para
+																							// documentar el codigo
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Cliente eliminado correctamente"),
 			@ApiResponse(code = 404, message = "Cliente no eliminado") })
 	public void removeCliente(@PathVariable("identificacion") String identificacion) {
@@ -93,7 +92,9 @@ public class ClienteResource {
 	}
 
 	@GetMapping
-	@ApiOperation(value = "Listar clientes", notes = "Servicio para listar todos los clientes")//Como se idetifica para documentar el codigo
+	@ApiOperation(value = "Listar clientes", notes = "Servicio para listar todos los clientes") // Como se idetifica
+																								// para documentar el
+																								// codigo
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Clientes encontrados"),
 			@ApiResponse(code = 404, message = "Cliente no encontrados") })
 	public ResponseEntity<List<Cliente>> findAll() {

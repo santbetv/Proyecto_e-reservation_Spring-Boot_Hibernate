@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sbvdeveloper.ereservation.modelo.Cliente;
-import com.sbvdeveloper.ereservation.modelo.Reserva;
+import com.sbvdeveloper.ereservation.entity.Cliente;
+import com.sbvdeveloper.ereservation.entity.Reserva;
 import com.sbvdeveloper.ereservation.negocio.repository.ReservaRepository;
 
 /**
@@ -31,13 +31,8 @@ import com.sbvdeveloper.ereservation.negocio.repository.ReservaRepository;
 @Transactional(readOnly = true)
 public class ReservaService {
 
-	private final ReservaRepository reservaRepository;
-
-	
 	@Autowired
-	public ReservaService(ReservaRepository reservaRepository) {
-		this.reservaRepository = reservaRepository;
-	}
+	private  ReservaRepository reservaRepository;
 
 	/**
 	 * Método para realizar la operación de guardar una reserva

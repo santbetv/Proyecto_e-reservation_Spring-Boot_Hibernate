@@ -16,7 +16,7 @@
 	<description>Project for Spring Boot, Aplicación de reservas </description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -40,7 +40,6 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.1.4</version>
 		</dependency>
 
 		<!-- Swagger -->
@@ -62,12 +61,31 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+		<!-- Si se trabaja con JDK 9+ COLOCAR MANUAL -->
+		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+
+		<!-- Si se trabaja con JDK 9+ COLOCAR MANUAL -->
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			<!-- <version>2.0.4.RELEASE</version> -->
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 		</dependency>
 
 
@@ -81,17 +99,18 @@
 	</dependencies>
 
 	<build>
-	
-	
+
+
 		<finalName>e-reservation</finalName><!-- nombre final de la aplicacion -->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
-			<!-- Esto permite construir una imagen a partir de nuestro pom, en el momento que estemos configurando -->
-			<!-- y no tenerlo que correr desde nuestro terminal-->
+
+			<!-- Esto permite construir una imagen a partir de nuestro pom, en el 
+				momento que estemos configurando -->
+			<!-- y no tenerlo que correr desde nuestro terminal -->
 			<plugin>
 				<groupId>io.fabric8</groupId><!-- plugin para hacer imagenes -->
 				<artifactId>docker-maven-plugin</artifactId>
@@ -99,18 +118,22 @@
 				<configuration><!-- Seccion de configuracion -->
 					<images>
 						<image>
-							<name>santbetv/${project.build.finalName}</name><!-- Usuario y finalName  -->
+							<name>santbetv/${project.build.finalName}</name><!-- Usuario y finalName -->
 							<build>
 								<from>openjdk</from><!-- JDK libre , independiente -->
-								<entryPoint>java -Dspring.profiles.active=prod -jar /home/rizzoli/Documentos/DockerImagenIndependientes/${project.build.finalName}.jar</entryPoint><!-- Crear imagen para produccion -->
+								<entryPoint>java -Dspring.profiles.active=prod -jar
+									/home/rizzoli/Documentos/DockerImagenIndependientes/${project.build.finalName}.jar</entryPoint><!-- 
+									Crear imagen para produccion -->
 								<assembly><!-- Como se ensambla o construye internamente -->
-									<basedir>/home/rizzoli/Documentos/DockerImagenIndependientes/</basedir><!-- directorio base para la generacion de imagen -->
+									<basedir>/home/rizzoli/Documentos/DockerImagenIndependientes/</basedir><!-- 
+										directorio base para la generacion de imagen -->
 									<descriptorRef>artifact</descriptorRef>
 									<inline>
 										<id>assembly</id>
 										<files>
 											<file>
-												<source>target/${project.build.finalName}.jar</source><!-- Archivo a partir de cual se genrear la imagen -->
+												<source>target/${project.build.finalName}.jar</source><!-- Archivo 
+													a partir de cual se genrear la imagen -->
 											</file>
 										</files>
 									</inline>
