@@ -47,7 +47,6 @@ public class Cliente implements Serializable {
 	private String identificacion;
 	private String telefono;
 	private String email;
-
 	// @JsonManagedReference
 	// @JsonBackReference//validar ya no deja ver en cliente sus reservas
 	@JsonIgnoreProperties(value = { "cliente", "hibernateLazyInitializer", "handler" }, allowSetters = true)
